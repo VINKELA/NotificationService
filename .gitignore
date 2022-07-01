@@ -7,3 +7,5 @@
 /.vs
 /NotificationService/obj
 /NotificationService/.vs/NotificationService/v16
+/NotificationServiceTest/obj/Debug/netcoreapp3.1
+/NotificationServiceTest/obj

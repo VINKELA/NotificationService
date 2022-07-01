@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/NotificationService/obj/Debug/netcoreapp3.1
+/.vs/NotificationService/v16
+/.vs
+/NotificationService/obj
+/NotificationService/.vs/NotificationService/v16

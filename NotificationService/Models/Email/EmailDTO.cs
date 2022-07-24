@@ -4,10 +4,14 @@ namespace NotificationService.Models
 {
     public class EmailDTO
     {
-        public Dictionary<string, string> To { get; set; }
+        public string[] Destinations { get; set; }
+        public string[] CcDestinations { get; set; }
+        public string[] BccDestination { get; set; }
         public string Subject { get; set; }
-        public string Content { get; set; }
-        public List<byte[]> Attachments { get; set; }
+        public string Message { get; set; }
+        public string TemplateUrl { get; set; }
+        public List<string> Attachments { get; set; }
+        public Dictionary<string, string> TemplateCustomization { get; set; }
 
     }
 }

@@ -8,16 +8,20 @@ namespace NotificationService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Notifications : ControllerBase
+    public class NotificationsController : Controller
+
     {
         private readonly IEmailService _emailService;
-        public Notifications(IEmailService emailService)
+        public NotificationsController(IEmailService emailService)
         {
             _emailService = emailService;
         }
 
         // POST api/<Notifications>
         [HttpPost("sendEmail")]
-        public IActionResult Post([FromBody] EmailDTO email) => Ok(_emailService.SendEmailAsync(new Message(email)));
+        public ActionResult<Response<string>> Post([FromBody] EmailDTO email) => Ok(_emailService.SendEmail(email));
+
+        [HttpGet("emailTemplate")]
+        public IActionResult MailTemplate() => View();
     }
 }

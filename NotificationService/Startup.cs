@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NotificationService.MiddleWares;
 using NotificationService.Services.NonRelational.Implementations;
 using NotificationService.Services.NonRelational.Interfaces;
 
@@ -30,10 +31,9 @@ namespace NotificationService
               .GetSection("EmailConfiguration")
               .Get<EmailConfig>();
             services.AddSingleton(emailConfig);
-
-
-
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IServiceResponse, ServiceReponse>();
+            services.AddMvc();
 
 
         }
@@ -48,13 +48,10 @@ namespace NotificationService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notification Service v1"));
 
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

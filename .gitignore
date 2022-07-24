@@ -9,3 +9,6 @@
 /NotificationService/.vs/NotificationService/v16
 /NotificationServiceTest/obj/Debug/netcoreapp3.1
 /NotificationServiceTest/obj
+/NotificationService/bin/Debug/netcoreapp3.1
+/NotificationService/.vs/NotificationService/DesignTimeBuild
+/NotificationServiceTest/bin/Debug/netcoreapp3.1

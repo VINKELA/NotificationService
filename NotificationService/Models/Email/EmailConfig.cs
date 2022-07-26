@@ -1,4 +1,4 @@
-﻿namespace NotificationService.Services.NonRelational.Implementations
+﻿namespace NotificationService.Models.Email
 {
     public class EmailConfig
     {

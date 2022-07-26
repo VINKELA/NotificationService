@@ -1,12 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NotificationService.MiddleWares;
+using NotificationService.Models.DbContexts;
+using NotificationService.Models.Email;
+using NotificationService.Models.PushNotification;
 using NotificationService.Services.NonRelational.Implementations;
 using NotificationService.Services.NonRelational.Interfaces;
+using NotificationService.Services.Relational.Implementations;
+using NotificationService.Services.Relational.Interfaces;
 
 namespace NotificationService
 {
@@ -22,6 +28,8 @@ namespace NotificationService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NoficationDb>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("NotificationDb")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -30,12 +38,17 @@ namespace NotificationService
             var emailConfig = Configuration
               .GetSection("EmailConfiguration")
               .Get<EmailConfig>();
+            var pushNotificationConfig = Configuration
+              .GetSection("VAPID")
+              .Get<PushNotificationConfig>();
+
             services.AddSingleton(emailConfig);
+            services.AddSingleton(pushNotificationConfig);
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IServiceResponse, ServiceReponse>();
+            services.AddScoped<IPushNotificationService, PushNotificationService>();
+            services.AddScoped<IPushNotificationRepository, PushNotificationRepository>();
             services.AddMvc();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

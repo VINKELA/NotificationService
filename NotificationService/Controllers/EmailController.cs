@@ -8,11 +8,11 @@ namespace NotificationService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NotificationsController : Controller
+    public class EmailController : Controller
 
     {
         private readonly IEmailService _emailService;
-        public NotificationsController(IEmailService emailService)
+        public EmailController(IEmailService emailService)
         {
             _emailService = emailService;
         }
